@@ -1,104 +1,114 @@
-:root {
-    --color-primario: #927dc1;
-    --color-secundario: #4cc9f0;
-    --color-oscuro: #2b2d42;
-    --color-error: #e63946;
-    --color-exito: #2a9d8f;
-    --sidebar-width: 250px;
-    --navbar-height: 60px;
+/* ==================== SIDEBAR ==================== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--color-oscuro);
+    color: white;
+    z-index: 1040;
+    transition: left 0.3s ease;
+    padding-top: var(--navbar-height);
+    overflow-y: auto;
 }
 
-* {
-    box-sizing: border-box;
+.sidebar.abierto {
+    left: 0;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* ==================== LOGIN ==================== */
-.login-body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.sidebar-header {
     padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.login-container {
-    width: 100%;
-    max-width: 420px;
-}
-
-.login-card {
-    background: white;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-.login-icon {
-    font-size: 3.5rem;
-    color: var(--color-primario);
-    margin-bottom: 15px;
-}
-
-.login-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--color-oscuro);
-    margin-bottom: 5px;
-}
-
-.login-subtitle {
-    color: #6c757d;
-    font-size: 14px;
-    margin-bottom: 0;
-}
-
-.login-btn {
-    padding: 12px;
-    font-weight: 600;
-    background-color: var(--color-primario);
-    border-color: var(--color-primario);
-}
-
-.login-btn:hover {
-    background-color: #7a63a8;
-    border-color: #7a63a8;
-}
-
-.form-control:focus {
-    border-color: var(--color-primario);
-    box-shadow: 0 0 0 0.25rem rgba(146, 125, 193, 0.25);
-}
-
-.mensaje {
-    text-align: center;
-    font-size: 14px;
-    font-weight: 500;
-    min-height: 20px;
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
     margin: 0;
 }
 
-.mensaje.error { color: var(--color-error); }
-.mensaje.exito { color: var(--color-exito); }
-
-.link-registro {
-    color: var(--color-primario);
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    color: #adb5bd;
     text-decoration: none;
-    font-weight: 600;
-    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
 }
 
-.link-registro:hover {
-    text-decoration: underline;
-    color: #7a63a8;
+.sidebar-link:hover,
+.sidebar-link.active {
+    background-color: rgba(146, 125, 193, 0.2);
+    color: white;
+    border-left-color: var(--color-primario);
 }
 
-.mensaje a {
-    color: inherit;
-    font-weight: 700;
-    text-decoration: underline;
+.sidebar-submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-submenu.abierto {
+    max-height: 300px;
+}
+
+.sidebar-sublink {
+    display: block;
+    padding: 10px 20px 10px 45px;
+    color: #adb5bd;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.sidebar-sublink:hover {
+    background-color: rgba(146, 125, 193, 0.15);
+    color: white;
+}
+
+.sidebar-link .fa-chevron-down {
+    transition: transform 0.3s;
+}
+
+.sidebar-link.abierto .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+/* ==================== CONTENIDO PRINCIPAL ==================== */
+.contenido-principal {
+    margin-left: 0;
+    padding: 80px 20px 20px 20px;
+    transition: margin-left 0.3s ease;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.contenido-principal.desplazado {
+    margin-left: var(--sidebar-width);
+}
+
+/* ==================== RESPONSIVE (Escritorio) ==================== */
+@media (min-width: 992px) {
+    .sidebar {
+        left: 0;
+    }
+
+    .contenido-principal {
+        margin-left: var(--sidebar-width);
+    }
+
+    .sidebar.cerrado {
+        left: -250px;
+    }
+
+    .contenido-principal.completo {
+        margin-left: 0;
+    }
 }
