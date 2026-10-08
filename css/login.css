@@ -112,3 +112,9 @@
         margin-left: 0;
     }
 }
+
+/* ==================== NAVBAR ==================== */
+.sistema-navbar {
+    height: var(--navbar-height);
+    z-index: 1050;
+}

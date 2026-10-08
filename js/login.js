@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     const esLogin = document.getElementById('loginForm') !== null;
+    const esSistema = document.getElementById('sidebar') !== null;
+
     if (esLogin) inicializarLogin();
+    if (esSistema) inicializarSistema();
 });
 
 const moduloAutenticacion = (function () {
@@ -249,5 +252,61 @@ function inicializarLogin() {
 
     inputPassword.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') btnLogin.click();
+    });
+}
+
+function inicializarSistema() {
+
+    const usuario = moduloAutenticacion.obtenerSesion();
+    if (!usuario) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    document.getElementById('nombreUsuarioNavbar').textContent = usuario.nombre;
+    document.getElementById('correoUsuarioNavbar').textContent = usuario.correo;
+
+    const btnToggleSidebar = document.getElementById('btnToggleSidebar');
+    const sidebar = document.getElementById('sidebar');
+    const contenidoPrincipal = document.getElementById('contenidoPrincipal');
+
+    btnToggleSidebar.addEventListener('click', function () {
+        sidebar.classList.toggle('abierto');
+        sidebar.classList.toggle('cerrado');
+        contenidoPrincipal.classList.toggle('desplazado');
+        contenidoPrincipal.classList.toggle('completo');
+    });
+
+    const toggleUsuarios = document.getElementById('toggleUsuarios');
+    const submenuUsuarios = document.getElementById('submenuUsuarios');
+
+    toggleUsuarios.addEventListener('click', function (e) {
+        e.preventDefault();
+        submenuUsuarios.classList.toggle('abierto');
+        toggleUsuarios.classList.toggle('abierto');
+    });
+
+    const seccionBienvenida = document.getElementById('seccionBienvenida');
+    const seccionCaptura = document.getElementById('seccionCaptura');
+    const linkCaptura = document.getElementById('linkCaptura');
+
+    if (linkCaptura) {
+        linkCaptura.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (seccionBienvenida) seccionBienvenida.style.display = 'none';
+            if (seccionCaptura) seccionCaptura.style.display = 'block';
+
+            if (window.innerWidth < 992) {
+                sidebar.classList.remove('abierto');
+            }
+        });
+    }
+
+    document.getElementById('btnSalir').addEventListener('click', function (e) {
+        e.preventDefault();
+        if (confirm('¿Estás seguro que deseas salir del sistema?')) {
+            moduloAutenticacion.cerrarSesion();
+            window.location.href = 'login.html';
+        }
     });
 }
