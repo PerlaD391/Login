@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema - Iniciar Sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-body">
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="text-center mb-4">
+                <i class="fas fa-user-shield login-icon"></i>
+                <h1 class="login-title">Iniciar Sesión</h1>
+                <p class="login-subtitle">Accede al sistema</p>
+            </div>
+
+            <form id="loginForm" autocomplete="off">
+                <div class="mb-3">
+                    <label for="correo" class="form-label">
+                        <i class="fas fa-envelope me-2"></i>Correo electrónico
+                    </label>
+                    <input type="text" class="form-control" id="correo" placeholder="correo@ejemplo.com" autocomplete="off">
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="form-label">
+                        <i class="fas fa-lock me-2"></i>Contraseña
+                    </label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" placeholder="Mín. 8 caracteres" autocomplete="new-password">
+                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                            <i class="fas fa-eye" id="toggleIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary w-100 login-btn" id="btnLogin">
+                    <i class="fas fa-sign-in-alt me-2"></i>Entrar al sistema
+                </button>
+
+                <p class="mensaje mt-3" id="mensajeLogin"></p>
+
+                <div class="text-center mt-3">
+                    <small class="text-muted">
+                        ¿No tienes cuenta?
+                        <a href="#" id="linkRegistro" class="link-registro">Regístrate aquí</a>
+                    </small>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div class="modal fade" id="modalRegistro" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-user-plus me-2"></i>Crear Cuenta
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formRegistro" autocomplete="off">
+                        <div class="mb-3">
+                            <label for="registroCorreo" class="form-label">Correo electrónico</label>
+                            <input type="text" class="form-control" id="registroCorreo" placeholder="correo@ejemplo.com" autocomplete="off">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="registroPassword" class="form-label">Contraseña</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="registroPassword" placeholder="Mín. 8 caracteres" autocomplete="new-password">
+                                <button class="btn btn-outline-secondary" type="button" id="toggleRegistroPassword">
+                                    <i class="fas fa-eye" id="toggleIconRegistro"></i>
+                                </button>
+                            </div>
+                            <small class="text-muted">Mayúscula, minúscula, número y símbolo.</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="registroPasswordConfirm" class="form-label">Confirmar contraseña</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="registroPasswordConfirm" placeholder="Repite la contraseña" autocomplete="new-password">
+                                <button class="btn btn-outline-secondary" type="button" id="toggleRegistroConfirm">
+                                    <i class="fas fa-eye" id="toggleIconConfirm"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <p class="mensaje" id="mensajeRegistro"></p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnRegistrar">
+                        <i class="fas fa-save me-2"></i>Crear Cuenta
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Pollito890d/ProgramWebActividad2@main/js/utileria.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
