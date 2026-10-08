@@ -309,4 +309,153 @@ function inicializarSistema() {
             window.location.href = 'login.html';
         }
     });
+    /* ---- Inicializar formularios ---- */
+    inicializarFormUsuario();
+    inicializarFormAlumno();
+}
+/* FORMULARIO: Captura de Usuario */
+function inicializarFormUsuario() {
+    const formUsuario = document.getElementById('formCapturaUsuario');
+    if (!formUsuario) return;
+
+    const inputNombre = document.getElementById('nombreUsuarioCaptura');
+    const inputCorreo = document.getElementById('correoUsuarioCaptura');
+    const inputPass = document.getElementById('passUsuarioCaptura');
+
+    const errNombre = document.getElementById('errNombreCaptura');
+    const errCorreo = document.getElementById('errCorreoCaptura');
+    const errPass = document.getElementById('errPassCaptura');
+
+    formUsuario.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const nombre = inputNombre.value.trim();
+        const correo = inputCorreo.value.trim();
+        const pass = inputPass.value;
+        let valido = true;
+
+        if (!soloLetras(nombre)) {
+            errNombre.style.setProperty('display', 'block', 'important');
+            inputNombre.classList.add('is-invalid');
+            valido = false;
+        } else {
+            errNombre.style.setProperty('display', 'none', 'important');
+            inputNombre.classList.remove('is-invalid');
+        }
+
+        if (!validarCorreo(correo)) {
+            errCorreo.style.setProperty('display', 'block', 'important');
+            inputCorreo.classList.add('is-invalid');
+            valido = false;
+        } else {
+            errCorreo.style.setProperty('display', 'none', 'important');
+            inputCorreo.classList.remove('is-invalid');
+        }
+
+        if (!validarPassword(pass)) {
+            errPass.style.setProperty('display', 'block', 'important');
+            inputPass.classList.add('is-invalid');
+            valido = false;
+        } else {
+            errPass.style.setProperty('display', 'none', 'important');
+            inputPass.classList.remove('is-invalid');
+        }
+
+        if (valido) {
+            const resultado = moduloAutenticacion.registrar(correo, pass, nombre);
+            if (!resultado.exito) {
+                mostrarAlerta(resultado.mensaje, 'danger');
+                return;
+            }
+            mostrarAlerta('Usuario <strong>' + nombre + '</strong> guardado correctamente.', 'success');
+            formUsuario.reset();
+        }
+    });
+}
+
+/*FORMULARIO: Alumnos + Modal de Edad*/
+function inicializarFormAlumno() {
+    const formAlumno = document.getElementById('formAlumno');
+    if (!formAlumno) return;
+
+    const inputNombre = document.getElementById('nombreAlumno');
+    const inputNumControl = document.getElementById('numControlAlumno');
+    const inputNacimiento = document.getElementById('nacimientoAlumno');
+
+    const errNombre = document.getElementById('errNombreAlumno');
+    const errNumControl = document.getElementById('errNumControl');
+    const errNacimiento = document.getElementById('errNacimientoAlumno');
+
+    formAlumno.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const nombre = inputNombre.value.trim();
+        const numControl = inputNumControl.value.trim();
+        const fecha = inputNacimiento.value;
+        let valido = true;
+
+        if (!soloLetras(nombre)) {
+            errNombre.style.setProperty('display', 'block', 'important');
+            inputNombre.classList.add('is-invalid');
+            valido = false;
+        } else {
+            errNombre.style.setProperty('display', 'none', 'important');
+            inputNombre.classList.remove('is-invalid');
+        }
+
+        const soloDigitos = /^\d+$/.test(numControl);
+        if (!soloDigitos || numControl.length !== 6) {
+            errNumControl.style.setProperty('display', 'block', 'important');
+            inputNumControl.classList.add('is-invalid');
+            valido = false;
+        } else {
+            errNumControl.style.setProperty('display', 'none', 'important');
+            inputNumControl.classList.remove('is-invalid');
+        }
+
+        if (!fecha || calcularEdad(fecha) < 0) {
+            errNacimiento.style.setProperty('display', 'block', 'important');
+            inputNacimiento.classList.add('is-invalid');
+            valido = false;
+        } else {
+            errNacimiento.style.setProperty('display', 'none', 'important');
+            inputNacimiento.classList.remove('is-invalid');
+        }
+
+        if (valido) {
+            const edad = calcularEdad(fecha);
+            const esMayor = esMayorDeEdad(fecha);
+
+            const modalHeader = document.getElementById('modalHeaderBg');
+            const modalIcono = document.getElementById('modalIcono');
+            const modalTitulo = document.getElementById('modalTituloEdad');
+            const modalDetalle = document.getElementById('modalDetalleEdad');
+
+            if (esMayor) {
+                modalHeader.className = 'modal-header bg-success text-white';
+                modalIcono.innerHTML = '<i class="fas fa-check-circle text-success"></i>';
+                modalTitulo.textContent = 'Alumno Mayor de Edad';
+                modalDetalle.textContent = nombre + ' (No. Control: ' + numControl + ') tiene ' + edad + ' años cumplidos. Cumple con la mayoría de edad legal.';
+            } else {
+                modalHeader.className = 'modal-header bg-warning text-dark';
+                modalIcono.innerHTML = '<i class="fas fa-exclamation-triangle text-warning"></i>';
+                modalTitulo.textContent = 'Alumno Menor de Edad';
+                modalDetalle.textContent = nombre + ' (No. Control: ' + numControl + ') tiene ' + edad + ' años cumplidos. No cumple con la mayoría de edad.';
+            }
+
+            const modalBootstrap = new bootstrap.Modal(document.getElementById('modalEdadAlumno'));
+            modalBootstrap.show();
+        }
+    });
+}
+
+/* UTILIDAD: Alerta flotante del sistema */
+function mostrarAlerta(mensaje, tipo) {
+    const alerta = document.getElementById('alertaSistema');
+    const alertaTexto = document.getElementById('alertaSistemaTexto');
+    if (!alerta || !alertaTexto) return;
+
+    alerta.className = 'alert alert-' + (tipo || 'success') + ' alert-dismissible fade show';
+    alertaTexto.innerHTML = mensaje;
+    alerta.classList.remove('d-none');
 }
