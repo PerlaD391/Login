@@ -3,11 +3,11 @@
 **Materia:** Programación Web
 **Grupo:** 7SC
 **Actividad:** Actividad 5
-**Integrantes:** Martinez Villalobos Dante 
-**Maestra:** Martinez Nieto Adelina  
-**Ubicación:** `https://perlad391.github.io/Login/login.html`  
+**Integrantes:** Martinez Villalobos Dante y Gallardo Vasquez Perla Danae
+**Maestra:** Martínez Nieto Adelina  
+**Ubicación:** [https://perlad391.github.io/Login/login.html](https://perlad391.github.io/Login/login.html)  
 
-## Portada y Descripción Breve
+## Descripción Breve
 
 El **Sistema Escolar con Autenticación** es una aplicación web responsiva desarrollada en HTML5, CSS3 y JavaScript puro (vanilla), estructurada en dos pantallas principales: `login.html` (acceso y registro) e `index.html` (panel de administración).
 
