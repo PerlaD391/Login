@@ -16,6 +16,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* ==================== LOGIN ==================== */
 .login-body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
@@ -209,6 +210,7 @@ body {
     }
 }
 
+/* ==================== EXTRAS ==================== */
 .link-registro {
     color: var(--color-primario);
     text-decoration: none;
@@ -219,6 +221,12 @@ body {
 .link-registro:hover {
     text-decoration: underline;
     color: #7a63a8;
+}
+
+.mensaje a {
+    color: inherit;
+    font-weight: 700;
+    text-decoration: underline;
 }
 
 .mensaje a {

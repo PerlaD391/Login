@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (esSistema) inicializarSistema();
 });
 
+/* =========================================================================
+   MÓDULO DE AUTENTICACIÓN (basado en Login 2, adaptado a claves de Login 1)
+   ========================================================================= */
 const moduloAutenticacion = (function () {
 
     const CLAVE_USUARIOS = 'usuariosRegistrados';
@@ -74,6 +77,9 @@ const moduloAutenticacion = (function () {
     };
 })();
 
+/* =========================================================================
+   LOGIN (login.html)
+   ========================================================================= */
 function inicializarLogin() {
 
     const inputCorreo = document.getElementById('correo');
@@ -102,6 +108,7 @@ function inicializarLogin() {
         }
     });
 
+    /* ---- Toggle contraseña registro ---- */
     const btnToggleRegPass = document.getElementById('toggleRegistroPassword');
     const toggleIconReg = document.getElementById('toggleIconRegistro');
     const inputRegPass = document.getElementById('registroPassword');
@@ -132,6 +139,7 @@ function inicializarLogin() {
         });
     }
 
+    /* ---- Abrir modal registro ---- */
     linkRegistro.addEventListener('click', function (e) {
         e.preventDefault();
         mensajeRegistro.textContent = '';
@@ -140,6 +148,7 @@ function inicializarLogin() {
         modalRegistro.show();
     });
 
+    /* ---- Botón Registrar (solo correo + contraseña) ---- */
     btnRegistrar.addEventListener('click', function () {
         mensajeRegistro.textContent = '';
         mensajeRegistro.className = 'mensaje';
@@ -190,6 +199,7 @@ function inicializarLogin() {
         }, 1500);
     });
 
+    /* ---- Botón Login ---- */
     btnLogin.addEventListener('click', function () {
         mensaje.textContent = '';
         mensaje.className = 'mensaje';
@@ -250,11 +260,15 @@ function inicializarLogin() {
         }, 1000);
     });
 
+    /* ---- Enter en password ---- */
     inputPassword.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') btnLogin.click();
     });
 }
 
+/* =========================================================================
+   SISTEMA (index.html)
+   ========================================================================= */
 function inicializarSistema() {
 
     const usuario = moduloAutenticacion.obtenerSesion();
@@ -266,6 +280,7 @@ function inicializarSistema() {
     document.getElementById('nombreUsuarioNavbar').textContent = usuario.nombre;
     document.getElementById('correoUsuarioNavbar').textContent = usuario.correo;
 
+    /* ---- Toggle sidebar ---- */
     const btnToggleSidebar = document.getElementById('btnToggleSidebar');
     const sidebar = document.getElementById('sidebar');
     const contenidoPrincipal = document.getElementById('contenidoPrincipal');
@@ -277,6 +292,7 @@ function inicializarSistema() {
         contenidoPrincipal.classList.toggle('completo');
     });
 
+    /* ---- Submenú Usuarios ---- */
     const toggleUsuarios = document.getElementById('toggleUsuarios');
     const submenuUsuarios = document.getElementById('submenuUsuarios');
 
@@ -286,22 +302,22 @@ function inicializarSistema() {
         toggleUsuarios.classList.toggle('abierto');
     });
 
+    /* ---- Ir a Captura ---- */
     const seccionBienvenida = document.getElementById('seccionBienvenida');
     const seccionCaptura = document.getElementById('seccionCaptura');
     const linkCaptura = document.getElementById('linkCaptura');
 
-    if (linkCaptura) {
-        linkCaptura.addEventListener('click', function (e) {
-            e.preventDefault();
-            if (seccionBienvenida) seccionBienvenida.style.display = 'none';
-            if (seccionCaptura) seccionCaptura.style.display = 'block';
+    linkCaptura.addEventListener('click', function (e) {
+        e.preventDefault();
+        seccionBienvenida.style.display = 'none';
+        seccionCaptura.style.display = 'block';
 
-            if (window.innerWidth < 992) {
-                sidebar.classList.remove('abierto');
-            }
-        });
-    }
+        if (window.innerWidth < 992) {
+            sidebar.classList.remove('abierto');
+        }
+    });
 
+    /* ---- Cerrar sesión ---- */
     document.getElementById('btnSalir').addEventListener('click', function (e) {
         e.preventDefault();
         if (confirm('¿Estás seguro que deseas salir del sistema?')) {
@@ -309,11 +325,15 @@ function inicializarSistema() {
             window.location.href = 'login.html';
         }
     });
-    /* ---- Inicializar formularios ---- */
+
+    /* ---- Inicializar formularios (Login 2) ---- */
     inicializarFormUsuario();
     inicializarFormAlumno();
 }
-/* FORMULARIO: Captura de Usuario */
+
+/* =========================================================================
+   FORMULARIO: Captura de Usuario (Login 2)
+   ========================================================================= */
 function inicializarFormUsuario() {
     const formUsuario = document.getElementById('formCapturaUsuario');
     if (!formUsuario) return;
@@ -373,7 +393,9 @@ function inicializarFormUsuario() {
     });
 }
 
-/*FORMULARIO: Alumnos + Modal de Edad*/
+/* =========================================================================
+   FORMULARIO: Alumnos + Modal de Edad (Login 2)
+   ========================================================================= */
 function inicializarFormAlumno() {
     const formAlumno = document.getElementById('formAlumno');
     if (!formAlumno) return;
@@ -449,7 +471,9 @@ function inicializarFormAlumno() {
     });
 }
 
-/* UTILIDAD: Alerta flotante del sistema */
+/* =========================================================================
+   UTILIDAD: Alerta flotante del sistema
+   ========================================================================= */
 function mostrarAlerta(mensaje, tipo) {
     const alerta = document.getElementById('alertaSistema');
     const alertaTexto = document.getElementById('alertaSistemaTexto');
