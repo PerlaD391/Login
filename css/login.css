@@ -81,7 +81,7 @@
     transform: rotate(180deg);
 }
 
-/* ==================== CONTENIDO PRINCIPAL ==================== */
+/*  CONTENIDO PRINCIPAL  */
 .contenido-principal {
     margin-left: 0;
     padding: 80px 20px 20px 20px;
@@ -94,7 +94,7 @@
     margin-left: var(--sidebar-width);
 }
 
-/* ==================== RESPONSIVE (Escritorio) ==================== */
+/*  RESPONSIVE (Escritorio) */
 @media (min-width: 992px) {
     .sidebar {
         left: 0;
