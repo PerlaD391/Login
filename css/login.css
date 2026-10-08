@@ -118,3 +118,8 @@
     height: var(--navbar-height);
     z-index: 1050;
 }
+
+/* ==================== MODAL ==================== */
+.modal-header.bg-primary {
+    background-color: var(--color-primario) !important;
+}
