@@ -1,11 +1,11 @@
 # Sistema Escolar con Autenticación y Panel de Captura
 
-**Materia:** Programación Web  
-**Actividad:** Actividad 5 · Programación Web · 7SC  
-**Alumna:** Martinez Nieto Adelina  
-**Ubicación:** `c:\xampp\htdocs\Actividad5\Login`  
-
----
+**Materia:** Programación Web
+**Grupo:** 7SC
+**Actividad:** Actividad 5
+**Integrantes:** Martinez Villalobos Dante 
+**Maestra:** Martinez Nieto Adelina  
+**Ubicación:** `https://perlad391.github.io/Login/login.html`  
 
 ## Portada y Descripción Breve
 
@@ -188,11 +188,3 @@ Dropdown desplegable en el navbar con el correo del usuario y la opción de cerr
    ![LoginPrueba8LogOut.png](./img/LoginPrueba8LogOut.png)
 
 ---
-
-## Datos de la Asignatura e Integrantes
-
-- **Materia:** Programación Web
-- **Actividad:** Actividad 5
-- **Grupo:** 7SC
-- **Integrante:** Martinez Nieto Adelina
-- **Tecnologías:** HTML5, CSS3, JavaScript (ES6+), Bootstrap 5.3.3, Font Awesome 6.5.1
